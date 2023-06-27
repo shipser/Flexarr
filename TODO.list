@@ -1,0 +1,53 @@
+#####      Flexarr/CLI/Config/Params.py      #####
+
+No TODOs in this file!
+
+##################################################
+
+#####   Flexarr/CLI/Functions/Argunamts.py   #####
+
+No TODOs in this file!
+
+##################################################
+
+#####    Flexarr/CLI/Functions/Logger.py     #####
+
+No TODOs in this file!
+
+##################################################
+
+##### Flexarr/CLI/Functions/ListFunctions.py #####
+
+No TODOs in this file!
+
+##################################################
+
+#####     Flexarr/CLI/Functions/Base.py      #####
+
+No TODOs in this file!
+
+##################################################
+
+##### Flexarr/CLI/Extra Tools/SubExtract.py  #####
+
+(203)	# To Do:  Add verbose functionality and remove unwanted massages when extracting subtitles
+(232)	# To Do:  add convert ass to srt functionality
+
+##################################################
+
+#####         Flexarr/CLI/Flexarr.py         #####
+
+(70)	# To Do:  Add logger functionality
+(167)	# To Do:  Add log file here...
+
+##################################################
+
+#####       Flexarr/CLI/ListBuilder.py       #####
+
+(79)	# To Do:  Add functionality to get imdb and tvdb data
+(80)	# To Do:  Add the ability to overwrite existing file
+(81)	# To Do:  Add the ability to build a list from current folder structure
+(82)	# To Do:  Add 2 list merge functionality
+
+##################################################
+
