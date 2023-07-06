@@ -80,6 +80,8 @@ def main(ArgsArr):
     # TODO: Add the ability to overwrite existing file
     # TODO: Add the ability to build a list from current folder structure
     # TODO: Add 2 list merge functionality
+    # TODO: Add counter (num of num) for progress
+    # TODO: fix blank () and (
     try:
         # Message the user
         if (Args_Arr[1]):

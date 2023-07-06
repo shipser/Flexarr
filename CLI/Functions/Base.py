@@ -4,9 +4,11 @@
 # Imports #
 ###########
 
-import os                       # OS base functions
-import re                       # For Regex Strings
-from Config.Params import *     # Import configurations
+import os                               # OS base functions
+import re                               # For Regex Strings
+from Config.Params import *             # Import configurations
+import shutil                           # For copy file operations
+from Functions.Logger import *          # Import logger functions
 
 # Includes for inquirerpy
 from InquirerPy import inquirer
@@ -159,16 +161,19 @@ def Is_Dir_Empty(src):
 
 
 # Rename the file and return the new path
-def Rename_TV_Movie(Org_File, New_full_Path, Verbo):
+def Rename_TV_Movie(Org_File, New_full_Path, Verbo, LogPath):
     """
     Rename a file.
 
     depends on:
         imports:
             os
+            shutil
 
     :param Org_File: File path to rename.
     :param New_full_Path: New file path to save.
+    :param Verbo: Verbose anable (True or False).
+    :param LogPath: Path to log file.
     :return: True on success, False on any fail.
     """
     try:
@@ -177,16 +182,21 @@ def Rename_TV_Movie(Org_File, New_full_Path, Verbo):
             os.makedirs(os.path.dirname(New_full_Path))
         # Check if file alredy exists and confirm overwrite
         if (os.path.isfile(New_full_Path)):
+            # Log File Exists
+            LogMassage("File already exists.", LogPath)
             if (Confirm_Select("File alredy exists. Do you want to overwrite it?")):
+                # Log file overwrite
+                LogMassage(
+                    "User selected to overwrite the existing file.", LogPath)
                 if (Verbo):
                     print("Overwrite the file!")
                 # Rename The File
-                os.rename(Org_File, New_full_Path)
+                shutil.move(Org_File, New_full_Path)
             elif (Verbo):
                 print("Skiping the file!")
         else:
             # Rename The File
-            os.rename(Org_File, New_full_Path)
+            shutil.move(Org_File, New_full_Path)
         return True
     except:
         return False
