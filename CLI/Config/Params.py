@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Release number - Major.Minor.Fix, where fix can be uncomplited feature update
-Ver = "1.0.0-alpha1"
+Ver = "1.0.0-alpha2"
 # Set help message for the cli
 desc = "******************************************************************************************\n\n  Flexarr by Shay Pasvolsky (C).\n\n******************************************************************************************"
 
