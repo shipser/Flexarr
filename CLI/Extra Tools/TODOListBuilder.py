@@ -28,7 +28,7 @@ from InquirerPy.separator import Separator
 ###############################
 
 # Release number - Major.Minor.Fix, where fix can be uncomplited feature update
-Ver = "1.0.0"
+Ver = "1.0.1"
 # Set help message for the cli
 desc = "******************************************************************************************\n\n  TODO list builder by Shay Pasvolsky (C).\n\n******************************************************************************************"
 # Input error vlaues
@@ -145,8 +145,8 @@ def GetPyFiles(srcpath):
                             # Make sure to ignore __init__.py files and itself
                             if (os.path.basename(File) != "__init__.py" and os.path.basename(File) != os.path.basename(__file__)):
                                 # Save the file path to the arrays
-                                PyFiles.append([os.path.join(Root_dir, File), os.path.join(re.split(
-                                    r'/', srcpath)[-2], re.split(srcpath, os.path.join(Root_dir, File))[-1])])
+                                PyFiles.append([os.path.join(Root_dir, File), re.split(
+                                    r'/', srcpath)[-1] + re.split(srcpath, os.path.join(Root_dir, File))[-1]])
         return PyFiles
     except Exception as Error:
         return [False, Error]

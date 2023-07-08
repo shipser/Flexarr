@@ -71,6 +71,8 @@ def main(ArgsArr):
 
     try:
         # TODO: allow for similar files (for TV) to be named once
+        # TODO: Allow to disable log file
+        # TODO: Allow for user selected log file
         # Initialize Log file
         LogFileInit, LogPath, LogCreateTimeStamp = Create_Log_File(
             (src if (src != NSRC) else os.path.dirname(__file__)), Verb)
@@ -219,14 +221,18 @@ def main(ArgsArr):
                             # Update the path to list location if user requested a move
                             if (MoveFiles):
                                 ModPath = os.path.join(LPath, LName)
+                                # Add season folder if needed
+                                if (Mtyp == MedTy[0]):
+                                    ModPath = os.path.join(
+                                        ModPath, SeaPfx + " " + Se)
                                 if (Verb):
                                     print("Moveing to new location ({})".format(
                                         ModPath))
                             # Make full file path
                             ModFullPath = os.path.join(ModPath, ModName)
                             # Log new name and path after all modifications
-                            LogMassage("\n\tNew name after modification: '{}'\n\tNew path after modification: '{}'".format(
-                                ModName, ModPath), LogPath)
+                            LogMassage("\n\tNew name after modification: '{}'\n\tNew path after modification: '{}'\n\tNew full file path after modification: '{}'".format(
+                                ModName, ModPath, ModFullPath), LogPath)
                             # Rename the file and move it to correct folder structure
                             Rename_TV_Movie(f, ModFullPath, Verb, LogPath)
                             # Log Rename and move
@@ -252,6 +258,7 @@ def main(ArgsArr):
                 # Print finished message
                 if (Verb):
                     print("Finished all tasks!")
+                    print("Log savet at: '{}'".format(LogPath))
                 # Log finish time
                 LogFinishMassage(LogPath, LogCreateTimeStamp)
                 return True
