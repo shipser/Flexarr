@@ -1,47 +1,49 @@
-#####      /CLI/Config/Params.py      #####
+#####      Flexarr/CLI/Config/Params.py      #####
 
 No TODOs in this file!
 
-###########################################
+##################################################
 
-#####   /CLI/Functions/Argunamts.py   #####
-
-No TODOs in this file!
-
-###########################################
-
-#####    /CLI/Functions/Logger.py     #####
+#####   Flexarr/CLI/Functions/Argunamts.py   #####
 
 No TODOs in this file!
 
-###########################################
+##################################################
 
-##### /CLI/Functions/ListFunctions.py #####
-
-No TODOs in this file!
-
-###########################################
-
-#####     /CLI/Functions/Base.py      #####
+#####    Flexarr/CLI/Functions/Logger.py     #####
 
 No TODOs in this file!
 
-###########################################
+##################################################
 
-##### /CLI/Extra Tools/SubExtract.py  #####
+##### Flexarr/CLI/Functions/ListFunctions.py #####
+
+No TODOs in this file!
+
+##################################################
+
+#####     Flexarr/CLI/Functions/Base.py      #####
+
+No TODOs in this file!
+
+##################################################
+
+##### Flexarr/CLI/Extra Tools/SubExtract.py  #####
 
 (203)	# To Do:  Add verbose functionality and remove unwanted massages when extracting subtitles
 (232)	# To Do:  add convert ass to srt functionality
 
-###########################################
+##################################################
 
-#####         /CLI/Flexarr.py         #####
+#####         Flexarr/CLI/Flexarr.py         #####
 
 (73)	# To Do:  allow for similar files (for TV) to be named once
+(74)	# To Do:  Allow to disable log file
+(75)	# To Do:  Allow for user selected log file
 
-###########################################
+##################################################
 
-#####       /CLI/ListBuilder.py       #####
+#####       Flexarr/CLI/ListBuilder.py       #####
 
 (79)	# To Do:  Add functionality to get imdb and tvdb data
 (80)	# To Do:  Add the ability to overwrite existing file
@@ -50,5 +52,5 @@ No TODOs in this file!
 (83)	# To Do:  Add counter (num of num) for progress
 (84)	# To Do:  fix blank () and (
 
-###########################################
+##################################################
 
