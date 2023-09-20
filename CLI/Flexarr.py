@@ -41,6 +41,7 @@ def main(ArgsArr):
     ListPath = ArgsArr[2]       # Path to media list file
     MoveFiles = ArgsArr[3]      # Move files to correct folders
     remsrc = ArgsArr[4]         # Remove source folder to cleanup
+    GroupFiles = ArgsArr[5]     # Group media files based on data extracted
     File_List = []              # Place holder for files in source directory
     Med_List_Names = []         # Place holder for media list info
     Med_List_Full = []          # Place holder for media list info
@@ -79,50 +80,61 @@ def main(ArgsArr):
         # Check if the source folder is valid and do the logic
         if (src != NSRC):
             # Log operation
-            LogMassage("Source folder ('{}') is valid".format(src), LogPath)
+            if (LogFileInit):
+                LogMassage(
+                    "Source folder ('{}') is valid".format(src), LogPath)
             if (MoveFiles):
-                LogMassage(
-                    "User selected to move the files to new location.", LogPath)
+                if (LogFileInit):
+                    LogMassage(
+                        "User selected to move the files to new location.", LogPath)
             if (remsrc):
-                LogMassage(
-                    "User selected to remove source folder after moveing all media files.", LogPath)
+                if (LogFileInit):
+                    LogMassage(
+                        "User selected to remove source folder after moveing all media files.", LogPath)
             if Verb:  # Show progress if requested
-                LogMassage("Verbose is enabled.", LogPath)
+                if (LogFileInit):
+                    LogMassage("Verbose is enabled.", LogPath)
                 print("Source folder is valid, searching for media files...")
             # Get all media files inside the sorce folder
             File_List = GetFiles(src)
             if (File_List[0] == FGFiles):  # Check if failed to get files
                 # Log Files Found
-                LogMassage("Failed to get files in source directory.", LogPath)
+                if (LogFileInit):
+                    LogMassage(
+                        "Failed to get files in source directory.", LogPath)
                 if Verb:
                     print("Cann't get media files, exiting!")
                 return False
             elif (File_List[0] == NFiles):  # Check if found media files, if not exit
                 # Log Files Found
-                LogMassage("No media files found in directory.", LogPath)
+                if (LogFileInit):
+                    LogMassage("No media files found in directory.", LogPath)
                 if Verb:
                     print("No media files found, exiting!")
                 return False
             else:  # Found media files, do the logic
                 # Log Files Found
-                LogMassage(BuildLogMassageFromArray(
-                    "Files found:", File_List, 1, "'"), LogPath)
+                if (LogFileInit):
+                    LogMassage(BuildLogMassageFromArray(
+                        "Files found:", File_List, 1, "'"), LogPath)
                 if Verb:
                     print("Found media files to work on, Continueing...")
                 # Log list path provided
-                if (ListPath == NList):
+                if (ListPath == NList and LogFileInit):
                     LogMassage("No valid external list provided.", LogPath)
                 # Load external list
                 if (ListPath != NList):
                     # Log external list path
-                    LogMassage("External list path: '" +
-                               ListPath + "'", LogPath)
+                    if (LogFileInit):
+                        LogMassage("External list path: '" +
+                                   ListPath + "'", LogPath)
                     ExtList, Med_List_Full, Med_List_Names = Load_List(
                         ListPath)
                     # Log data from external list
-                    LogMassage("External list read status: " +
-                               ExtList, LogPath)
-                    if (ExtList == SuccessM):
+                    if (LogFileInit):
+                        LogMassage("External list read status: " +
+                                   ExtList, LogPath)
+                    if (ExtList == SuccessM and LogFileInit):
                         LogMassage(BuildLogMassageFromArray(
                             "Media in list:", Med_List_Full, 2, "'"), LogPath)
                     # Add Manual as a choice
@@ -150,15 +162,17 @@ def main(ArgsArr):
                         print(
                             "Failed to read list, unkown error. Continueing without the list...\n")
                 # Log working on files
-                LogMassage("Starting to work on files:", LogPath)
+                if (LogFileInit):
+                    LogMassage("Starting to work on files:", LogPath)
                 # Loop the file list
                 for f in File_List:
                     # Extract file data
                     GDSucc, Mtyp, Se, Ep, Fname, Fdir, FExt, MName, MYear, Hdeb, MRes, Ftype = Get_Movie_TV_Data(
                         f)
                     # Log File Data
-                    LogMassage("Data for file ('{}')\n".format(f) + BuildMassageJSON(["Data extract status:", "Media type:", "Season:", "Episode(s):", "File name:", "File location:", "File extention:",
-                               "Media name:", "Year:", "Hebrew dubed:", "Media resolution:", "File category:"], [GDSucc, Mtyp, Se, Ep, Fname, Fdir, FExt, MName, MYear, Hdeb, MRes, Ftype]), LogPath)
+                    if (LogFileInit):
+                        LogMassage("Data for file ('{}')\n".format(f) + BuildMassageJSON(["Data extract status:", "Media type:", "Season:", "Episode(s):", "File name:", "File location:", "File extention:",
+                                   "Media name:", "Year:", "Hebrew dubed:", "Media resolution:", "File category:"], [GDSucc, Mtyp, Se, Ep, Fname, Fdir, FExt, MName, MYear, Hdeb, MRes, Ftype]), LogPath)
                     if (GDSucc == SuccessM):
                         # Message the user - success
                         if (Verb):
@@ -196,8 +210,9 @@ def main(ArgsArr):
                         # Skip file if requested
                         if (LName == LPath and LName == EnterSkipChoice):
                             # Log skip
-                            LogMassage(
-                                "User selected to skip this file.", LogPath)
+                            if (LogFileInit):
+                                LogMassage(
+                                    "User selected to skip this file.", LogPath)
                             # Massage the user about skiping
                             if (Verb):
                                 print('Skiping "{}"'.format(MName))
@@ -205,13 +220,16 @@ def main(ArgsArr):
                             # Log info entered
                             if ((SelMed == EnterManualChoice) or (ExtList != SuccessM)):
                                 if (SelMed == EnterManualChoice):
+                                    if (LogFileInit):
+                                        LogMassage(
+                                            "User chose to enter name and path namualy.", LogPath)
+                                if (LogFileInit):
                                     LogMassage(
-                                        "User chose to enter name and path namualy.", LogPath)
-                                LogMassage(
-                                    "Manual name and path input from user:\n\tNew name: '{}'\n\tNew path: '{}'".format(LName, LPath), LogPath)
+                                        "Manual name and path input from user:\n\tNew name: '{}'\n\tNew path: '{}'".format(LName, LPath), LogPath)
                             else:
-                                LogMassage(
-                                    "Selected name and path input from user:\n\tNew name: '{}'\n\tNew path: '{}'".format(LName, LPath), LogPath)
+                                if (LogFileInit):
+                                    LogMassage(
+                                        "Selected name and path input from user:\n\tNew name: '{}'\n\tNew path: '{}'".format(LName, LPath), LogPath)
                             # Build new file name
                             ModName = Build_New_Name(
                                 Se, Ep, Mtyp, LName, LFsfx, FExt, Ftype)
@@ -231,20 +249,23 @@ def main(ArgsArr):
                             # Make full file path
                             ModFullPath = os.path.join(ModPath, ModName)
                             # Log new name and path after all modifications
-                            LogMassage("\n\tNew name after modification: '{}'\n\tNew path after modification: '{}'\n\tNew full file path after modification: '{}'".format(
-                                ModName, ModPath, ModFullPath), LogPath)
+                            if (LogFileInit):
+                                LogMassage("\n\tNew name after modification: '{}'\n\tNew path after modification: '{}'\n\tNew full file path after modification: '{}'".format(
+                                    ModName, ModPath, ModFullPath), LogPath)
                             # Rename the file and move it to correct folder structure
                             Rename_TV_Movie(f, ModFullPath, Verb, LogPath)
                             # Log Rename and move
-                            LogMassage("Renamed and moved the file to chosen location and name." if (
-                                MoveFiles) else "Renamed the file to the chosen name.", LogPath)
+                            if (LogFileInit):
+                                LogMassage("Renamed and moved the file to chosen location and name." if (
+                                    MoveFiles) else "Renamed the file to the chosen name.", LogPath)
                             # Print new line
                             if (Verb):
                                 print("######\n")
                     else:
                         # Log the fail
-                        LogMassage(
-                            "Failed to extract data for the file '{}'".format(f), LogPath)
+                        if (LogFileInit):
+                            LogMassage(
+                                "Failed to extract data for the file '{}'".format(f), LogPath)
                         # Messege the user - fail
                         if (Verb):
                             print("Failed to extract data from: ",
@@ -252,20 +273,23 @@ def main(ArgsArr):
                 # Clean up
                 if (Clean_Up(src, remsrc)):
                     # Log remove empty folders
-                    LogMassage("Cleand up the source folder.", LogPath)
+                    if (LogFileInit):
+                        LogMassage("Cleand up the source folder.", LogPath)
                     if (Verb):
                         print("Removed all empty sub folders in {}".format(src))
                 # Print finished message
                 if (Verb):
                     print("Finished all tasks!")
-                    print("Log savet at: '{}'".format(LogPath))
+                    print("Log saved at: '{}'".format(LogPath))
                 # Log finish time
-                LogFinishMassage(LogPath, LogCreateTimeStamp)
+                if (LogFileInit):
+                    LogFinishMassage(LogPath, LogCreateTimeStamp)
                 return True
         else:  # Source path is not valid
             # Log Error
-            LogMassage("Source is not valid.", LogPath)
-            LogFinishMassage(LogPath, LogCreateTimeStamp)
+            if (LogFileInit):
+                LogMassage("Source is not valid.", LogPath)
+                LogFinishMassage(LogPath, LogCreateTimeStamp)
             if Verb:  # Print error message if user wants to see info
                 print("Source path is not valid, exiting!")
             return False
