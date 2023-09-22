@@ -69,6 +69,8 @@ def main(ArgsArr):
     LogPath = ""                # Log file path
     LogFileInit = False         # Log file state
     LogCreateTimeStamp = ""     # Time stamp of log file initial creation
+    FileNum = 0                 # File number to work on
+    TotFiles = 0                # Total media files
 
     try:
         # TODO: allow for similar files (for TV) to be named once
@@ -97,6 +99,8 @@ def main(ArgsArr):
                 print("Source folder is valid, searching for media files...")
             # Get all media files inside the sorce folder
             File_List = GetFiles(src)
+            # Get number of files found
+            TotFiles = len(File_List)
             if (File_List[0] == FGFiles):  # Check if failed to get files
                 # Log Files Found
                 if (LogFileInit):
@@ -166,6 +170,8 @@ def main(ArgsArr):
                     LogMassage("Starting to work on files:", LogPath)
                 # Loop the file list
                 for f in File_List:
+                    # Increment the counter
+                    FileNum = FileNum + 1
                     # Extract file data
                     GDSucc, Mtyp, Se, Ep, Fname, Fdir, FExt, MName, MYear, Hdeb, MRes, Ftype = Get_Movie_TV_Data(
                         f)
@@ -176,7 +182,8 @@ def main(ArgsArr):
                     if (GDSucc == SuccessM):
                         # Message the user - success
                         if (Verb):
-                            print("######\nExtracted data for: ", f)
+                            print("######\nFile: ", FileNum, "From: ", TotFiles,
+                                  "\nExtracted data for: ", f)
                         # Do some logic
                         if (ExtList == SuccessM):
                             # Create the message to display
