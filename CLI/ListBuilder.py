@@ -82,6 +82,8 @@ def main(ArgsArr):
     # TODO: Add 2 list merge functionality
     # TODO: Add counter (num of num) for progress
     # TODO: fix blank () and (
+    # TODO: fix mishandaling folders in some cases
+    # TODO: fix mishandaling file names in some cases
     try:
         # Message the user
         if (Args_Arr[1]):

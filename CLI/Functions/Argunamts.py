@@ -20,7 +20,7 @@ parser = argparse.ArgumentParser(description=desc,
 parser.add_argument('-C', '-c', '--CleanUp', action='store_true',
                     help="Remove source folder after moveing the media files, will only work if no other files or folders left inside.")
 parser.add_argument('-G', '-g', '--GroupFiles', action='store_true',
-                    help="Group media files based on data extracted from file names.")
+                    help="Group media files based on data extracted from file names. (not yet functional)")
 parser.add_argument('-L', '-l', '--LoadList',
                     help="Load external TV show and Movie list to select the correct one from it.", default="")
 parser.add_argument('-M', '-m', '--Move', action='store_true',
